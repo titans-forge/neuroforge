@@ -1,0 +1,48 @@
+Titans Forge Community License 1.0
+LicenseRef-Titans-Forge-Community-1.0
+Copyright 2026 Titans Forge LLC
+
+1. Scope and acceptance
+This license applies only to software, documentation and other materials expressly designated as covered by this license by Titans Forge LLC (the Licensor). These are the Covered Materials. It does not apply to every file in a repository merely because this license is present. Exercising the permissions granted here constitutes acceptance of these terms. Rights independently available under applicable law are not limited.
+
+2. Definitions
+You means the person or organization exercising these permissions. A Group includes an organization and entities controlling, controlled by, or under common control with it; control means majority ownership or the power to direct management. Commercial Use means use for business operations, commercial advantage, or paid products or services, including internal use and use performed by an employee, contractor or service provider on behalf of a commercial beneficiary.
+
+Revenue means a Group's consolidated annual gross revenue, eliminating internal transactions, across all business activities, not only activities involving the Covered Materials. Use the most recently completed fiscal year. A Group without a completed fiscal year uses gross revenue since formation. Convert non-USD revenue using the average exchange rate for the measurement period published by a recognized central bank or financial reporting provider, consistently applied and documented. The threshold is a fixed US$1,000,000 and is not inflation adjusted.
+
+An Educational Institution is an established school, college, university, vocational school, or other institution whose primary mission is organized education. An Independent Researcher is a natural person conducting self-directed research outside work directed or commissioned for a commercial beneficiary. Employment elsewhere does not by itself disqualify a person. Research grants, scholarships, publication royalties and speaking honoraria do not by themselves disqualify a researcher; commissioned commercial work is assessed under the commercial-beneficiary rule below.
+
+3. Free permissions
+Subject to this license, Licensor grants You a worldwide, nonexclusive, royalty-free copyright license to use, reproduce, run, study, modify, publicly display and distribute the Covered Materials and modifications for the following purposes:
+(a) Personal, noncommercial use, including learning and experimentation.
+(b) Use by Educational Institutions for their own education, research and internal institutional operations, regardless of revenue or budget, including access for their students, faculty and staff. Tuition and research grants do not remove this exemption. Separate commercial subsidiaries, resale of hosted software access to outside businesses, and work performed on behalf of an otherwise ineligible commercial beneficiary are not covered by this exemption.
+(c) Self-directed research by Independent Researchers, including sharing research methods and results, regardless of institutional affiliation.
+(d) Commercial Use when each commercial Group on whose behalf the use is performed has Revenue at or below US$1,000,000. Individual businesses are subject to the same threshold. A qualifying contractor cannot extend free use to a larger commercial client. An unrelated customer merely receiving an ordinary report, image or other output does not thereby become a software user; operating the software as an outsourced function or providing interactive software access for that customer is use on that customer's behalf.
+(e) Nonproduction evaluation for up to 30 consecutive days by an otherwise ineligible organization, solely to decide whether to obtain a commercial license. Evaluation does not permit operational deployment or delivery of paid services.
+
+Educational Institutions and Independent Researchers qualify under (b) or (c) without a revenue test for those exempt uses. Other organizations, including government bodies and noneducational nonprofits, require a separate grant unless another permission above applies. Contact Licensor for such a grant; this license does not imply one.
+
+4. Commercial licensing and threshold transition
+Use outside section 3 requires a separate written license from Licensor before that use begins. Commercial licensing inquiries: justiniancapone@titansforge.tech.
+A previously qualifying Group that exceeds the threshold on its next completed fiscal-year measurement may continue its previously permitted use for 90 days after that fiscal year ends while obtaining a commercial license or discontinuing that use. No fee is imposed retroactively on use that qualified when performed. Groups already above the threshold when first using the software receive only the evaluation permission unless another exemption applies. Mergers or acquisitions changing Group eligibility receive the same 90-day transition from the transaction date.
+
+5. Copies, modifications and hosting
+Keep this license, copyright notices and applicable attribution notices with redistributed Covered Materials. Clearly identify modifications and preserve third-party notices. Distribute Covered Materials and modifications under these same terms, without removing eligibility restrictions or implying endorsement. Every recipient receives its grant directly from Licensor and must qualify independently. Separately authored, separable components may have their own terms. Distribution must not impose terms that prevent recipients from exercising this license's permissions for the Covered Materials.
+You may charge for permitted distribution, installation or services when the relevant use qualifies under section 3. Providing hosted or interactive access is use of the software; both the provider and any commercial beneficiary on whose behalf it is operated must qualify or obtain a separate license. Ordinary output sharing alone is not redistribution of the software.
+
+6. Patents, trademarks and third-party materials
+Licensor grants, for uses permitted here, a nonexclusive worldwide royalty-free patent license only for patent claims Licensor can license that are necessarily infringed by the unmodified Covered Materials. This patent grant terminates if You initiate patent litigation alleging that the Covered Materials infringe a patent. No trademark or endorsement rights are granted beyond truthful identification and required notices.
+Separately licensed code, models, weights, datasets, images and other third-party materials retain their own licenses. No rights in those materials are granted beyond rights Licensor actually holds. Prior grants under other licenses are not revoked by this license.
+
+7. Your work and contributions
+Licensor claims no ownership of Your inputs, independently created outputs or modifications by reason of this license. Outputs containing Covered Materials or third-party material remain subject to applicable rights. This provision does not guarantee copyrightability or clearance of outputs. Your commercial revenue from ordinary outputs is not a royalty owed to Licensor, although it may count toward the eligibility threshold for future software use.
+You retain rights in Your contributions. Submission alone does not grant Licensor permission to relicense a contribution commercially; any additional contributor grant must be separately and expressly agreed. Licensor may offer separate terms for material it owns or has authority to license.
+
+8. Term and termination
+These permissions continue for the received version while You comply and the use remains eligible. A later published license version does not automatically replace this one. On written notice of a first curable breach, You have 30 days to cure; permissions terminate if it is not cured within that period. Use outside the granted scope is not authorized during a cure period. Termination does not cancel grants held independently by compliant recipients. Disclaimers, accrued obligations and terms necessarily surviving termination remain effective.
+
+9. Warranty and liability
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COVERED MATERIALS ARE PROVIDED AS IS, WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR NONINFRINGEMENT. LICENSOR IS NOT LIABLE FOR INDIRECT, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES, LOST PROFITS, LOST DATA OR BUSINESS INTERRUPTION ARISING FROM THE MATERIALS OR THIS LICENSE. NOTHING EXCLUDES LIABILITY OR RIGHTS THAT APPLICABLE LAW DOES NOT ALLOW TO BE EXCLUDED.
+
+10. Entire grant
+This text is the complete community grant for the Covered Materials. A separate signed commercial agreement may grant additional rights. If a provision is unenforceable, the remaining provisions continue to the extent permitted by law. No payment, support, hosting or future-update commitment is created by this community license.

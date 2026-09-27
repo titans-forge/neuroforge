@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NeuroForge Medical Conference Organizer</title>
+            <link rel="stylesheet" href="/static/styles.css?v=20260902-4" />
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <header class="topbar">
+        <div class="brand" aria-label="NeuroForge">
+          <span class="brand-mark">NF</span>
+          <div>
+            <strong>NeuroForge</strong>
+            <span class="lane-chip">Clinical academic · not current care</span>
+          </div>
+        </div>
+        <nav class="primary-nav" aria-label="Workspace">
+          <button type="button" data-view="conference">Weekly Conference</button>
+          <button type="button" class="active" data-view="builder">Case Builder</button>
+          <button type="button" data-view="stress">Stress Test</button>
+          <button type="button" data-view="evidence">Evidence Desk</button>
+          <button type="button" data-view="quiz">Quiz Studio</button>
+          <button type="button" data-view="presenter">Presenter</button>
+        </nav>
+        <div class="top-actions">
+          <span class="local-status"><i></i>Local M5 Pro</span>
+          <button id="export-pdf-btn" class="quiet-button" type="button">Export PDF</button>
+          <button id="present-btn" class="primary-button" type="button">Present</button>
+        </div>
+      </header>
+
+      <aside class="conference-rail">
+        <section class="rail-header">
+          <div>
+            <span class="section-label">Weekly Conference</span>
+            <strong>Thursday, 12:00 PM</strong>
+          </div>
+          <span id="agenda-total" class="agenda-total">0 min</span>
+        </section>
+
+        <div class="rail-actions">
+          <label class="search-field">
+            <span class="visually-hidden">Search cases</span>
+            <input id="case-search" type="search" placeholder="Search cases" />
+          </label>
+          <button id="new-case-btn" class="square-button" type="button" title="Create case">+</button>
+        </div>
+        <div id="case-list" class="case-list"></div>
+
+        <section class="import-panel">
+          <div class="section-label">Study Import</div>
+          <label for="timepoint-label">Timepoint</label>
+          <input id="timepoint-label" type="text" value="Current" />
+          <input id="study-files" class="visually-hidden" type="file" multiple accept=".dcm,.png,.jpg,.jpeg,.tif,.tiff,.webp" />
+          <label class="file-button" for="study-files">Choose MRI / CT files</label>
+          <label class="attestation">
+            <input id="deid-attestation" type="checkbox" />
+            <span>I attest these files are de-identified.</span>
+          </label>
+          <button id="import-study-btn" class="secondary-button" type="button">Import Study</button>
+          <label for="library-select">TCIA library volume</label>
+          <select id="library-select" aria-label="TCIA library series">
+            <option value="">No library series</option>
+          </select>
+          <button id="attach-library-btn" class="secondary-button" type="button">Attach library volume</button>
+          <p id="import-status" class="muted">Files remain inside the M5 Pro case bundle. Library volumes scroll live slices; they are not copied as DICOM.</p>
+        </section>
+      </aside>
+
+      <main class="case-workspace">
+        <section class="case-heading">
+          <div>
+            <span id="case-code" class="case-code">Case</span>
+            <h1 id="case-title-heading">Loading case</h1>
+          </div>
+          <div class="heading-actions">
+            <span id="case-status" class="status-tag">draft</span>
+            <button id="sync-chart-btn" class="secondary-button" type="button" hidden>Sync to Chart</button>
+            <button id="save-case-btn" class="secondary-button" type="button">Save Case</button>
+          </div>
+        </section>
+
+        <section id="builder-view" class="view-panel active">
+          <div class="timeline-block">
+            <div class="section-title-row">
+              <h2>Longitudinal Studies</h2>
+              <span id="timeline-count" class="muted"></span>
+            </div>
+            <div id="study-timeline" class="study-timeline"></div>
+          </div>
+
+          <section class="image-stage">
+            <div id="image-empty" class="image-empty">Import a de-identified MRI or CT study to begin.</div>
+            <img id="active-image" alt="Selected de-identified neuroimaging preview" />
+            <div class="stage-overlay top-left">
+              <strong id="image-series">No series</strong>
+              <span id="image-meta">Local preview</span>
+            </div>
+            <div id="volume-presets" class="volume-presets" hidden>
+              <button type="button" data-preset="mri">MRI</button>
+              <button type="button" data-preset="soft">Soft</button>
+              <button type="button" data-preset="brain">Brain</button>
+              <button type="button" data-preset="blood">Blood</button>
+              <button type="button" data-preset="bone">Bone</button>
+            </div>
+            <div class="stage-tools">
+              <button id="previous-image-btn" type="button" title="Previous image">Prev</button>
+              <button id="next-image-btn" type="button" title="Next image">Next</button>
+              <button id="key-image-btn" type="button">Key Image</button>
+            </div>
+          </section>
+
+          <section class="key-strip-block">
+            <div class="section-title-row dark">
+              <h2>Key Images</h2>
+              <span id="key-count"></span>
+            </div>
+            <div id="asset-strip" class="asset-strip"></div>
+          </section>
+
+          <section class="narrative-editor">
+            <div class="section-title-row">
+              <h2>Conference Narrative</h2>
+              <span id="save-state" class="save-state">Local draft</span>
+            </div>
+            <div class="editor-grid">
+              <label>Clinical question<textarea id="clinical-question" rows="3"></textarea></label>
+              <label>Limitations<textarea id="limitations" rows="3"></textarea></label>
+              <label class="wide">Narrative<textarea id="narrative" rows="6"></textarea></label>
+              <label class="wide">Takeaways<textarea id="takeaways" rows="3"></textarea></label>
+            </div>
+          </section>
+        </section>
+
+        <section id="conference-view" class="view-panel">
+          <div class="conference-board">
+            <div>
+              <h2>Weekly Conference Agenda</h2>
+              <p>Arrange de-identified cases, confirm preparation readiness, and rehearse the meeting sequence.</p>
+            </div>
+            <div id="agenda-list" class="agenda-list"></div>
+          </div>
+        </section>
+
+        <section id="evidence-view" class="view-panel">
+          <div class="evidence-workspace">
+            <div class="evidence-intro">
+              <h2>Evidence Desk</h2>
+              <p>Search the local reviewed vault first, or run an explicit PubMed lookup. Only the typed query leaves this Mac.</p>
+            </div>
+            <div class="search-bar">
+              <input id="evidence-query-main" type="search" placeholder="Enter a topic, imaging pattern, or conference question" />
+              <select id="evidence-mode-main" aria-label="Evidence source">
+                <option value="local">Local reviewed vault</option>
+                <option value="online">Search PubMed</option>
+              </select>
+              <button id="evidence-search-main-btn" class="primary-button" type="button">Search</button>
+              <button id="save-topic-btn" class="secondary-button" type="button">Save Topic</button>
+            </div>
+            <section class="saved-topics">
+              <div class="section-title-row">
+                <h2>Saved Weekly Topics</h2>
+                <span class="muted">No continuous harvesting</span>
+              </div>
+              <div id="saved-topic-list"></div>
+            </section>
+            <div id="evidence-results-main" class="evidence-results"></div>
+          </div>
+        </section>
+
+        <section id="stress-view" class="view-panel">
+          <div class="stress-workspace">
+            <div class="stress-intro">
+              <div>
+                <h2>Virtual-brain stress test</h2>
+                <p>Record what the image shows if it helps, pin a working hypothesis, and name the conference move. Tools stay available; the debrief names misses after you commit. This is conference preparation, not current care.</p>
+              </div>
+              <span id="stress-gate" class="status-tag draft">Optional notes</span>
+            </div>
+            <div class="stress-grid">
+              <section>
+                <div class="section-title-row">
+                  <h2>Image observations</h2>
+                  <span id="stress-obs-count" class="muted">0 recorded</span>
+                </div>
+                <label>Finding<textarea id="stress-finding" rows="3" placeholder="What changed, on which sequence, and where."></textarea></label>
+                <label>Location<input id="stress-location" type="text" placeholder="e.g. periventricular white matter" /></label>
+                <button id="stress-add-obs-btn" class="secondary-button" type="button">Record observation</button>
+                <div id="stress-obs-list" class="stress-obs-list"></div>
+              </section>
+              <section>
+                <div class="section-title-row">
+                  <h2>Commit before challenge</h2>
+                </div>
+                <label>Working hypothesis<textarea id="stress-hypothesis" rows="3" placeholder="A discussable pattern, not a diagnosis."></textarea></label>
+                <label>Conference move<textarea id="stress-move" rows="3" placeholder="What you will show, and what this preview cannot settle."></textarea></label>
+                <label>Confidence before commit (0–100)
+                  <input id="stress-confidence" type="number" min="0" max="100" step="10" value="70" />
+                </label>
+                <button id="stress-commit-btn" class="primary-button" type="button">Commit stress test</button>
+                <p id="stress-status" class="muted">No commit yet. Commit whenever the conference move is ready.</p>
+              </section>
+            </div>
+            <section id="stress-debrief" class="stress-debrief" hidden>
+              <div class="section-title-row">
+                <h2>First try vs conference path</h2>
+              </div>
+              <ol id="stress-compare"></ol>
+              <div id="stress-modes"></div>
+              <p id="stress-expert"></p>
+            </section>
+          </div>
+        </section>
+
+        <section id="quiz-view" class="view-panel">
+          <div class="quiz-workspace">
+            <div class="quiz-intro">
+              <div>
+                <h2>Medical Imaging Quiz Studio</h2>
+                <p>Create case-linked, single-best-answer questions for medical students. Every item remains editable and requires physician approval before Word export.</p>
+              </div>
+              <div class="quiz-actions">
+                <button id="save-quiz-btn" class="secondary-button" type="button" disabled>Save Draft</button>
+                <button id="approve-quiz-btn" class="secondary-button" type="button" disabled>Approve All</button>
+                <button id="export-quiz-btn" class="primary-button" type="button" disabled>Export Word</button>
+              </div>
+            </div>
+            <div class="quiz-generator">
+              <label>Student level
+                <select id="quiz-audience">
+                  <option value="preclinical">Preclinical</option>
+                  <option value="clinical_medical_student" selected>Clinical medical student</option>
+                  <option value="advanced_medical_student">Advanced medical student</option>
+                </select>
+              </label>
+              <label>Topic
+                <input id="quiz-topic" type="text" value="neuroimaging interpretation" />
+              </label>
+              <label>Questions
+                <input id="quiz-count" type="number" min="1" max="8" value="5" />
+              </label>
+              <label class="quiz-image-toggle">
+                <input id="quiz-include-image" type="checkbox" checked />
+                <span>Use selected key image</span>
+              </label>
+              <button id="generate-quiz-btn" class="primary-button" type="button">Generate with Agents</button>
+            </div>
+            <div class="quiz-document-fields">
+              <label>Quiz title<input id="quiz-title" type="text" disabled /></label>
+              <label>Student instructions<textarea id="quiz-instructions" rows="2" disabled></textarea></label>
+            </div>
+            <div id="quiz-status" class="quiz-status">No quiz generated for this case.</div>
+            <div id="quiz-question-list" class="quiz-question-list"></div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="agent-rail">
+        <div class="agent-heading">
+          <span class="section-label">Agent Conference</span>
+          <span class="research-label">Research support</span>
+        </div>
+        <div class="agent-tabs" role="tablist" aria-label="Local agents">
+          <button class="active" type="button" data-agent="ASCLEPIUS">Asclepius</button>
+          <button type="button" data-agent="MINERVA">Minerva</button>
+          <button type="button" data-agent="WOLF">Wolf</button>
+        </div>
+
+        <section class="scope-panel">
+          <div class="section-title-row">
+            <h2>Scoped Attachments</h2>
+            <span id="scope-count">0</span>
+          </div>
+          <label><input id="attach-narrative" type="checkbox" checked /> Conference narrative</label>
+          <label><input id="attach-key-images" type="checkbox" checked /> Key-image metadata</label>
+          <label><input id="attach-evidence" type="checkbox" checked /> Reviewed evidence</label>
+        </section>
+
+        <section class="agent-actions">
+          <div class="action-row">
+            <button class="agent-action active" type="button" data-action="briefing">Briefing</button>
+            <button class="agent-action" type="button" data-action="challenge">Challenge</button>
+            <button class="agent-action" type="button" data-action="rehearsal">Rehearsal</button>
+          </div>
+          <textarea id="agent-question" rows="3" placeholder="What should the conference focus on?"></textarea>
+          <div class="agent-run-row">
+            <label>Tokens <input id="agent-tokens" type="number" min="600" max="2600" step="200" value="1800" /></label>
+            <button id="run-agent-btn" class="primary-button" type="button">Run Local Agent</button>
+          </div>
+          <div id="agent-status" class="muted">Briefing, challenge, and rehearsal are available for conference prep.</div>
+          <pre id="agent-output" class="agent-output">Briefing and challenge responses will appear here.</pre>
+        </section>
+
+        <section class="reviewed-evidence">
+          <div class="section-title-row">
+            <h2>Reviewed Evidence</h2>
+            <button id="open-evidence-btn" class="text-button" type="button">Search</button>
+          </div>
+          <div id="attached-evidence-list" class="attached-evidence-list"></div>
+        </section>
+      </aside>
+    </div>
+
+    <dialog id="new-case-dialog">
+      <form id="new-case-form" method="dialog">
+        <div class="dialog-heading">
+          <h2>Create Conference Case</h2>
+          <button id="close-dialog-btn" type="button" title="Close">Close</button>
+        </div>
+        <label>Case title<input id="new-case-title" required maxlength="160" /></label>
+        <label>Clinical question<textarea id="new-case-question" rows="4"></textarea></label>
+        <label>Allotted minutes<input id="new-case-minutes" type="number" min="5" max="90" value="15" /></label>
+        <button class="primary-button" type="submit">Create Case</button>
+      </form>
+    </dialog>
+
+    <div id="presenter-overlay" class="presenter-overlay" hidden>
+      <header>
+        <div><strong>NeuroForge Presenter</strong><span id="presenter-position">1 / 1</span></div>
+        <div>
+          <a id="presenter-pdf-link" class="quiet-button" href="#" target="_blank">PDF</a>
+          <button id="close-presenter-btn" class="quiet-button" type="button">Exit</button>
+        </div>
+      </header>
+      <main id="presenter-slide" class="presenter-slide"></main>
+      <footer>
+        <button id="presenter-prev-btn" type="button">Previous</button>
+        <span>Arrow keys navigate. De-identified conference preparation only.</span>
+        <button id="presenter-next-btn" type="button">Next</button>
+      </footer>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+        <script src="/static/app.js?v=20260902-4"></script>
+  </body>
+</html>
